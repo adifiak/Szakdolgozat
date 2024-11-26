@@ -1,0 +1,12 @@
+{
+    "spellright.language": [
+        "English",
+        "Hungarian"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|%|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
+}

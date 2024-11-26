@@ -1,0 +1,24 @@
+\chapter{Konklúzió és további munka}
+
+\section{Összefoglalás}
+A dolgozatban leírt munka során először összegyűjtöttem a modellalapú rendszertervezés és a szimulációs technológiák külön-külön illetve együttes alkalmazásának előnyeit.
+Ezután megvizsgáltam egy, a fenti technikákat integráló SysML v2 alapú tervezési módszertan által teljesítendő követelményeket, javaslatot tettem több különböző implementációs irányra, majd kiértékeltem ezeket.
+
+Az eredményeket felhasználva kidolgoztam ilyen módszertan alapjait és egy esettanulmányon keresztül demonstráltam az új, fentieknek megfelelő módszerek gyakorlati alkalmazását, ami számos az integrációból fakadó előnnyel jár, valamint alapot biztosít továbbiak elérésére, ha a hozzájuk szükséges fejlesztőeszközök létrejönnek.
+
+A javasolt módszereknek három fontos eleme van, amelyek nem, vagy csak részlegesen jelennek meg a korábbi módszertanokban.
+A dolgozat legfontosabb új gondolata az allokációk köré épülő rendszerszemlélet, amely a javasolt módszerek alapkövét képezi és tényleg különlegesnek számít a korábbi módszertanokhoz képest.
+Ezután fontos megemlíteni a modell hierarchikus finomítását, amellyel jól elhatárolhatóak, a különböző absztrakciós szintjei a modellnek és kényelmesen teszi lehetővé különböző implementációs lehetőségek összehasonlítását. Ezt a megoldást SysML v2 új nyelvi elemeinek a felhasználása tette lehetővé.
+Végül, de nem utolsó sorban, a javasolt megközelítésnek szerves részét képezik a szimulációs technikák. Erre a feladatra számos korábbi módszertanban tettek kísérletet, de azokban az esetekben mindig problémát jelentett, hogy ezeket utólag próbálták egy addigra kiforrott koncepcióba beilleszteni.
+
+A munkám során feltárásra került, hogy a javasolt előnyök némelyike külön eszközöket igényel, amelyek csak a fejlesztési folyamatban igényelnek helyet a használatukhoz, magától az alkalmazott módszertantól függetlenek.
+Ezek esetében megvizsgáltam, hogy használhatóak-e ezek a technikák a javasolt megközelítésekkel, melynek során nem találtam kizáró okot az együttes használatra.
+
+\section{További kutatási és fejlesztési lehetőségek}
+A rendszertervezési módszertanokban (Lásd: \ref{sec:KorabbiModszerek} rész) rendszerint a rendszer modellezése mellett nagy hangsúlyt helyeznek annak kontextusának, azaz beágyazó környezetének a modellezésére. Sajnos az eddigi munkám során ezt nem volt még lehetőségem kidolgozni, ezért szeretném először ezt a hiányosságát pótolni a javasolt módszertannak, hogy minél közelebb kerüljön egy teljes, gyakorlatban is jól alkalmazható módszertanhoz.
+
+A kódgenerálás kapcsán felmerült, hogy ez az elem elengedhetetlen ahhoz, hogy egy módszertan megfeleljen eredeti rendeltetésének, és bemutatásra került a fejlesztés alatt álló SysPhS szabvány is, amely alkalmazásával ez a feladat gyorsabban megoldható, mint saját eszköz fejlesztésével.
+Ezek alapján konzulensemmel fel is vettük a kapcsolatot a szabványon dolgozó egyik csapattal és megkezdtük az együttműködést a két eszköz összekapcsolása érdekében.
+
+Jelen dolgozat elsődlegesen a validációs technológiák közül a szimulációk integrálásával foglalkozott, mert ezek igényelnek külön környezetekben készített és futtatott modelleket, azonban a jövőben szeretnék több, más V\&V technikát is integrálni a javasolt módszerekbe és ezek függvényében bővíteni a bemutatott esettanulmányt.
+Az esettanulmány kidolgozása folyamán az eddig kidolgozott módszerekben azonosítottam több általános mintát, melyeknek egy SysML v2 nyelvi kiterjesztésben való összegyűjtése tovább egyszerűsítené azok használatát, amely előnyös lenne egy teljes módszertan kidolgozása esetén. Természetesen a nyelvi kiterjesztés elkészültével újra frissíteném az esettanulmányt, hogy használható legyen az új, kiforrottabb módszerek bemutatására, valamint referenciamodellnek.

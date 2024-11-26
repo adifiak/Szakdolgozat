@@ -1,0 +1,40 @@
+\chapter{Bevezetés}
+Ahogyan a mérnöki tudományok egyre szerteágazóbbak, a tervezett rendszerek pedig egyre összetettebbek lettek --~mind a komponensek, mind az érintett szakterületek számának tekintetében~--, megjelent az igény, hogy magukat a rendszereket is külön szakemberek tervezzék, ahogy az egyes alkotórészeket is~\cite{Gianni2017}.
+Így született meg a rendszertervezés területe, melynek elsődleges feladata a rendszerrel szemben támasztott követelmények azonosítása és teljesülésének garantálása.
+
+Kezdetben ezeket a feladatokat írásos dokumentumok segítségével készítették a rendszermérnökök, akik ezeknek a dokumentumoknak a naprakészen tartásával és az ezek közti hivatkozásokkal garantálták a tervek konzisztenciáját és a rendszer működőképességét.
+Ahogy a rendszerek komplexitása tovább emelkedett, ez a megközelítés kezdett tarthatatlanná válni. Egyre gyakoribbá váltak a tervezési hibák és egyre nagyobb terhet jelentett a mérnökök számára a rendszer állapotát tükröző dokumentumok naprakészen tartása.
+Erre a problémára nyújtott megoldást a modellalapú rendszertervezés megjelenése, ahol a folyamat központi eleme egy matematikailag is formalizált rendszermodell, amely a számítógépek számára is értelmezhető, ezzel meggyorsítva, egyszerűsítve és gyakran automatizálva olyan feladatokat, melyek korábban komoly terhet jelentettek a rendszermérnököknek és számos hibalehetőséget okoztak a tervezési folyamatban.
+
+Mára a terület nagyon sokat fejlődött és szorosan összefonódott a kritikus rendszerek --~mint például a repülőgépek, atomerőművek, vagy vasúti biztosítóberendezések~-- tervezésével. Ennek elsődleges oka, hogy ezeknek a rendszereknek a fejlesztése során elengedhetetlen, hogy minden egyes követelmény teljesüljön és nyomonkövethető legyen.
+Azért fontos ezzel külön rendszerszinten is foglalkozni, mert tökéletesen működő alkatrészekből is lehet hibás rendszert építeni, mivel az nem egyszerűen alkatrészek összessége, működését az egyes komponensek megfelelő együttműködése garantálja.
+
+Nem meglepő tehát, hogy a rendszertervezés területén is megjelentek a különböző validációs és verifikációs technikák, melyeknek célja, hogy a megfelelő rendszert és a megfelelő módon tervezzük meg.
+
+Az utóbbi években egyre több figyelmet kapott a rendszertervezők részéről a szimulációs technológiák, mint validációs és verifikációs eszköz felhasználása a rendszertervezés területén~\cite{Ma_2022}.
+Ezeket a technikákat már évtizedek óta használják ilyen célra más műszaki területeken, ezentúl számos esetben sikeresen használták fel őket a fejlesztés felgyorsítására és gazdaságosabbá tételére is.
+
+Ennek hatására számos munka született az elmúlt években a szimulációk potenciális előnyeiről a rendszertervezés területén és számos további lehetőséget azonosítottak, melyek a szimulációs technikák és a modellalapú rendszertervezés integrációjával további előnyöket biztosítanának a rendszermérnököknek.
+Mindennek ellenére a két területek integrációjára még nem született széles körben elterjedt, szabványos megoldás.
+
+Ezzel párhuzamosan a szabványosítás utolsó fázisába lépett a modellalapú rendszertervezésben legelterjedtebb SysML nyelv teljesen új, korszerűsített változata a SysML v2~\cite{Bajaj_2022}.
+Az új nyelv nagyon sokat fejlődött az elődjével kapcsolatos tapasztalatokból. A teljesen új, rendszertervezésre szabott metamodellen\footnote{A nyelv belső szerkezetét és működését leíró modell.} túl számos új elemmel bővült melyeknek célja a külső források kezelése, a követelmények nyomonkövethetőségének további javítása és a fejlesztőkörnyezetek és egyéb automatikus eszköztámogató szoftverek felé biztosított szabványos interfészek.
+
+Ehhez a merőben új nyelvhez új fejlesztési módszertanok kidolgozására is szükség van.
+A SysML-hez készült módszertanok esetében többről bejelentették már, hogy készül a SysML v2-re átültetett verzió, azonban ezek sajnos még nem használják majd ki az új szabvány által nyújtott gazdag új eszköztárat.
+Azonban hosszú távon olyan módszerekre van szükség, amelyek kihasználják ezeket a lehetőségeket, hiszen különben a bennük rejlő lehetőségek kiaknázatlanok maradnak. Persze ehhez a módszertanokon túl eszköztámogatásra is szükség lesz, de először a modellezési módszerek területén kell megalapozni ezeket a további fejlesztéseket.
+
+Ennek a dolgozatnak a célkitűzése egy ilyen, az új nyelvi elemeket kihasználó módszertan alapjainak kidolgozása.
+További cél, hogy a javasolt módszereket kezdetettől fogva a szimulációs technológiák figyelembevételével, azokkal összhangban legyenek kidolgozva.
+Ez hosszútávon megoldást jelenthetne a fent említett integrációs problémákra. Ennek a célnak az elérése jóval könnyebb a SysML v2 nyújtotta új módszerek segítségével.
+További segítséget nyújt továbbá, hogy egy alapoktól szimulációkkal együtt tervezett módszertan kidolgozása jóval egyszerűbb feladat, mint összhangba hozni olyan módszereket a technológiával, amelyek kidolgozása során még nem volt szempont egy ilyen lehetőség kihasználása.
+
+Ez a dolgozat egy ilyen fejlesztési módszertannal szembeni követelmények és a megvalósítás lehetséges irányait gyűjti össze, majd értékeli ki.
+
+Ezután bemutatok egy az összegyűjtött adatokra támaszkodva megtervezett SysML v2-t használó módszertan alapjait, amely a rendszermodellek új szabvánnyal való tervezésén túl a szimulációs technológiák integrálására is alkalmas.
+
+A kidolgozott módszertan javaslatot ezután egy esettanulmány keretein belül egy kvadkopter rendszermodelljének és szimulációs modelljeinek elkészítésére használom fel, majd ezen keresztül mutatom be az így gyűjtött tapasztalatokat, valamint a módszerek nagyobb előnyeinek a gyakorlatban való megjelenését.
+
+A dolgozat végén értékelem a módszertan kidolgozott alapjait, a tervezési folyamatban nyújtott előnyeik, valamint a rendszertervezés, szimuláció és ezek integrációja kapcsán elért eredményeit.
+
+Azokban az esetekben, ahol a javasolt módszerek csupán előkészítik további eszközök használatát, és csak az ezekkel való kompatibilitást valósítják meg, ott összefoglalom, hogy milyen további kutatási és fejlesztési irányok szükségesek a két terület integrációjának megvalósításához.
