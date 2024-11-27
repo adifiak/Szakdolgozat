@@ -126,55 +126,61 @@ Ez az alfejezet ezeket a megközelítéseket veszi sorra és hasonlítja össze.
 Mint ahogy az a \ref{ModszertanHianya} részben is szerepelt, a SysML v2-höz még nincs kiforrott tervezési módszertan, így az eredményeink tesztelésének érdekében ki kellett dolgozni egy sajátot, amelybe integrálhatóak a szimulációs lépések is.
 A következőkben bemutatásra kerül a kidolgozott módszertan, amellyel az esettanulmányban használt rendszermodellek is készültek.
     
-    \subsection{A fejlesztés során felmerült problémák} \label{ProblemsToSolve}
-    Természetesen a modellezési módszerek nem úgy jönnek létre, hogy néhány hétnyi gondolkodás után megszületik a végleges megoldás, amely a továbbiakban gond nélkül alkalmazható.
-    A dolgozatban leírt eredmények kidolgozása során számtalan különböző modell készült, az aktuális módszer segítségével, majd az ezek elkészítése során szerzett tapasztalatokra építve finomítottam tovább a módszereimet a következő iteráció előtt.
-    A következőkben bemutatom ennek a folyamatnak a fontosabb tapasztalatait, amelyeknek mindenképpen tükröződniük kellett a dolgozat következő részeiben javasolt megoldásban.
+    \subsection{A módszertanokkal szembeni követelmények} \label{ProblemsToSolve}
+    A pontos módszerek kidolgozása előtt összegyűjtöttem azokat a követelményeket, amelyeknek mindenképpen meg kell felelni a javasolt módszereknek, hogy azok valóban jól használhatóak legyenek.
 
-        \subsubsection{A fizikai és logikai modellek elválasztásának hiánya} \label{sec:LogFiz}
-        A rendszertervezés során tipikusan két nézet jelenik meg. A logikai modell írja le, hogy milyen adatokkal avagy alapanyagokkal és mit csinál a rendszer.
-        A fizikai modell a rendszer felépítését adja meg a pontos alkatrészekkel és összeköttetéseikkel.
-        A fejlesztés során fontos, hogy a két modell függetlenül fejlődhessen, főleg a kezdeti szakaszokban, mivel a túl korai kölcsönhatásuk könnyen kedvezőtlen irányba viheti a rendszer fejlesztését.
-        Célszerű ezeket a modelleket külön forrásfájlokba szervezni, hogy elkerüljük a keveredésüket.
-        Ez a tervezők munkáját is megkönnyíti, mivel a két modellt tipikusan eltérő szakemberek fejlesztik, akiknek a kevert források csak felesleges komplikációkat okoznának.
-        
-        \subsubsection{Komponensek kohéziója a tervezés első fázisaiban}
-        Bár a fentiekből látható, hogy a logikai és fizikai modellek elválasztása fontos, azonban éppen ilyen káros az is, ha az adott komponenst különböző nézetekből leíró modellek között semmilyen kapcsolat nincs, hiszen ez téves feltételezés.
-        
-        A nézetek teljes függetlensége arra is lehetőséget biztosít, hogy a tervezők véletlenül két külön alkatrész logikai és fizikai modelljét gondolják összetartozónak.
-        
-        Persze a kész rendszerek ellenőrzése elméletben feltárná ezeket a hibákat, de akkor már számos kész, hibás példányt kellene javítani a szériahibák felfedezése után.
-        Azért hozunk létre fejlesztési módszertanokat, hogy ne ezek az ellenőrzések tárják fel a hibákat, hanem lehetőségük se legyen létrejönni.
-        Ez nemcsak jóval olcsóbb hosszútávon, de jóval biztonságosabb is, mivel az elképzelés, hogy az ellenőrzés feltár minden hibát feltételezi, hogy az ellenőrző folyamat maga nem hibás, ami természetesen nem feltételezhető kritikus rendszerek esetében.
+    Ezeknek a követelményeknek a megsértése vagy a rendszertervezési illetve szimulációs szakterületek egyikéről jön, alapvető elvárásként, vagy a módszerek gyakorlati alkalmazhatóságát lehetetlenítené el a megsértésük.
 
-        \subsubsection{Modellstruktúra átláthatósága}
-        A fent említett két nézeten kívül még számos dolog jelenik meg egy rendszermodellben.
-        Célszerű olyan módszertant létrehozni, amely mindegyiknek meghatároz egy pontos helyet, ahol a modellben elhelyezkedik, hogy könnyen lehessen navigálni a források között és mindenki számára átlátható legyen.
-        A legjobb, ha ezek nem csak szabályokként jelennek meg, hanem a módszer olyan vázat is biztosít a munkának, amely kikényszeríti a megfelelő felépítést\footnote{A gyakorlatban ez azt jelenti, hogy legyen kényelmes és egyszerű ezt használni a biztosított eszközökkel. A struktúrára tényleges garancia nehezen kényszeríthető ki, de a legkisebb ellenállás elve a gyakorlatban mégis eléri ezt az eredményt.}.
+        \begin{req}[A fizikai és logikai modellek elválasztásának hiánya] \label{sec:LogFiz}
+            A rendszertervezés során tipikusan két nézet jelenik meg. A logikai modell írja le, hogy milyen adatokkal avagy alapanyagokkal és mit csinál a rendszer.
+            A fizikai modell a rendszer felépítését adja meg a pontos alkatrészekkel és összeköttetéseikkel.
+            A fejlesztés során fontos, hogy a két modell függetlenül fejlődhessen, főleg a kezdeti szakaszokban, mivel a túl korai kölcsönhatásuk könnyen kedvezőtlen irányba viheti a rendszer fejlesztését.
+            Célszerű ezeket a modelleket külön forrásfájlokba szervezni, hogy elkerüljük a keveredésüket.
+            Ez a tervezők munkáját is megkönnyíti, mivel a két modellt tipikusan eltérő szakemberek fejlesztik, akiknek a kevert források csak felesleges komplikációkat okoznának.   
+        \end{req}
+        
+        \begin{req}[Komponensek kohéziója a tervezés első fázisaiban]
+            Bár a fentiekből látható, hogy a logikai és fizikai modellek elválasztása fontos, azonban éppen ilyen káros az is, ha az adott komponenst különböző nézetekből leíró modellek között semmilyen kapcsolat nincs, hiszen ez téves feltételezés.
+        
+            A nézetek teljes függetlensége arra is lehetőséget biztosít, hogy a tervezők véletlenül két külön alkatrész logikai és fizikai modelljét gondolják összetartozónak.
+            
+            Persze a kész rendszerek ellenőrzése elméletben feltárná ezeket a hibákat, de akkor már számos kész, hibás példányt kellene javítani a szériahibák felfedezése után.
+            Azért hozunk létre fejlesztési módszertanokat, hogy ne ezek az ellenőrzések tárják fel a hibákat, hanem lehetőségük se legyen létrejönni.
+            Ez nemcsak jóval olcsóbb hosszútávon, de jóval biztonságosabb is, mivel az elképzelés, hogy az ellenőrzés feltár minden hibát feltételezi, hogy az ellenőrző folyamat maga nem hibás, ami természetesen nem feltételezhető kritikus rendszerek esetében.
+        \end{req}
 
-        \subsubsection{Hierarchikus tervezés támogatása} \label{sec:Hierarhia}
-        A műszaki tudományok minden területén bevett gyakorlat, hogy különböző hierarchiákat vezetünk be a tervezés során.
-        Ennek célja, hogy megkönnyítsék a tervek áttekintését és csökkentsék a komplexitás mértékét, hogy a problémák lokálisan mindig kezelhető keretek közt maradjanak.
-        Ezek alapján nyilvánvaló, hogy csak olyan tervezési módszer fogadható el, amely támogatja a hierarchikus tervezést.
+        \begin{req}[Modellstruktúra átláthatósága]
+            A fent említett két nézeten kívül még számos dolog jelenik meg egy rendszermodellben.
+            Célszerű olyan módszertant létrehozni, amely mindegyiknek meghatároz egy pontos helyet, ahol a modellben elhelyezkedik, hogy könnyen lehessen navigálni a források között és mindenki számára átlátható legyen.
+            A legjobb, ha ezek nem csak szabályokként jelennek meg, hanem a módszer olyan vázat is biztosít a munkának, amely kikényszeríti a megfelelő felépítést\footnote{A gyakorlatban ez azt jelenti, hogy legyen kényelmes és egyszerű ezt használni a biztosított eszközökkel. A struktúrára tényleges garancia nehezen kényszeríthető ki, de a legkisebb ellenállás elve a gyakorlatban mégis eléri ezt az eredményt.}.
+        \end{req}
 
-        \subsubsection{Szimulációs modellek vetületei, variánsainak reprezentálása} \label{sec:SzimIntKov}
-        Jelen dolgozat egyik kiemelt célja, hogy kapcsolatot teremtsen a szimulációs és a rendszermodellek között egy új tervezési módszertan kidolgozásával.
-        Mivel a szimulációk a fejlesztési folyamat részei, így ez alapvetően a rendszermodellben jelenti új elemek megjelenését.
-        
-        A szimulációs modelleknek tehát valamilyen formában meg kell jelenniük a rendszermodellekben.
-        Ezeknek a lenyomatoknak a kapcsán fontos kiemelni egy lényeges különbséget a két modelltípus között.
-        Míg egy konkrét rendszerhez jellemzően egy rendszermodell tartozik, addig szimulációs modellből több is készülhet egy komponenshez, hogy különböző szempontokból vagy különböző részletességgel mutassák be azt.
-        
-        Ha az a célunk, hogy ennek a technológiának a teljes potenciálját kihasználjuk, akkor elengedhetetlen támogatni több ilyen modell elkészítését.
+        \begin{req}[Hierarchikus tervezés támogatása] \label{sec:Hierarhia}
+            A műszaki tudományok minden területén bevett gyakorlat, hogy különböző hierarchiákat vezetünk be a tervezés során.
+            Ennek célja, hogy megkönnyítsék a tervek áttekintését és csökkentsék a komplexitás mértékét, hogy a problémák lokálisan mindig kezelhető keretek közt maradjanak.
+            Ezek alapján nyilvánvaló, hogy csak olyan tervezési módszer fogadható el, amely támogatja a hierarchikus tervezést.    
+        \end{req}
 
-        \subsubsection{A modellek újrahasználásának megkönnyítése} \label{sec:Ujrahasznalas}
-        A tervezési folyamatok során gyakran kerülnek felhasználásra már kész, általános célú elemek.
-        Ennek előnye, hogy a gyakran használt elemeket elég egyszer megtervezni és tesztelni, utána számos alkalommal újrahasználhatóak.
-        
-        Ha lehetőség van egyszerűen felhasználni az ilyen modelleket a tervezés során az sokat gyorsít és egyszerűsít a folyamaton.
-        Ennek érdekében olyan módszertanra van szükség ami egységes megoldást ad erre a problémára, mivel így a gyártók készíthetik el a saját termékük modelljeit, ahelyett, hogy minden megrendelőjük saját verziót kellene készítsen.
-        
-        Tehát minél jobb támogatást nyújt egy módszertan a modellek újrafelhasználására, annál jobban támogatja annak használóit és annál valószínűbb, hogy a gyakorlatban is jól alkalmazható lesz.
+        \begin{req}[Szimulációs modellek vetületei, variánsaiknak reprezentálása] \label{sec:SzimIntKov}
+            Jelen dolgozat egyik kiemelt célja, hogy kapcsolatot teremtsen a szimulációs és a rendszermodellek között egy új tervezési módszertan kidolgozásával.
+            Mivel a szimulációk a fejlesztési folyamat részei, így ez alapvetően a rendszermodellben jelenti új elemek megjelenését.
+            
+            A szimulációs modelleknek tehát valamilyen formában meg kell jelenniük a rendszermodellekben.
+            Ezeknek a lenyomatoknak a kapcsán fontos kiemelni egy lényeges különbséget a két modelltípus között.
+            Míg egy konkrét rendszerhez jellemzően egy rendszermodell tartozik, addig szimulációs modellből több is készülhet egy komponenshez, hogy különböző szempontokból vagy különböző részletességgel mutassák be azt.
+            
+            Ha az a célunk, hogy ennek a technológiának a teljes potenciálját kihasználjuk, akkor elengedhetetlen támogatni több ilyen modell elkészítését.
+        \end{req}
+
+        \begin{req}[A modellek újrahasználásának megkönnyítése] \label{sec:Ujrahasznalas}
+            A tervezési folyamatok során gyakran kerülnek felhasználásra már kész, általános célú elemek.
+            Ennek előnye, hogy a gyakran használt elemeket elég egyszer megtervezni és tesztelni, utána számos alkalommal újrahasználhatóak.
+            
+            Ha lehetőség van egyszerűen felhasználni az ilyen modelleket a tervezés során az sokat gyorsít és egyszerűsít a folyamaton.
+            Ennek érdekében olyan módszertanra van szükség ami egységes megoldást ad erre a problémára, mivel így a gyártók készíthetik el a saját termékük modelljeit, ahelyett, hogy minden megrendelőjük saját verziót kellene készítsen.
+            
+            Tehát minél jobb támogatást nyújt egy módszertan a modellek újrafelhasználására, annál jobban támogatja annak használóit és annál valószínűbb, hogy a gyakorlatban is jól alkalmazható lesz.    
+        \end{req}
 
     \subsection{A kidolgozott módszertan javaslat bemutatása}
     A dolgozat fő eredménye egy a fenti elvárásoknak megfelelő módszertan javaslat elkészítése, melynek a végső verziója kerül most bemutatásra. A módszer evolúciójának részletes bemutatása túlmutat a dolgozat keretein, azonban a \ref{ProblemsToSolve} részben kiemelt pontok alapján nyomon követhető az egyes elemek mögött meghúzódó motiváció.
