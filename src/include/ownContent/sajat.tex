@@ -187,7 +187,7 @@ A következőkben bemutatásra kerül a kidolgozott módszertan, amellyel az ese
         
         \subsubsection{Alapgondolatok} \label{sec:Alapgondolatok}
         A javasolt módszertan megértésének legjobb módja, az általa létrehozandó modellek szerkezetének megértése. Mielőtt a teljes modellt megvizsgálnánk, vegyünk egy egyszerűsített képet az alapvető mögöttes elképzelésről, amelyre ráépülnek majd a különböző lépések. Ez az alapvető struktúra a \ref{fig:Alapstruktura} ábrán látható.
-        A modelleknek ebben a felosztásban négy fő eleme van. A fizikai és logikai nézetek a \ref{sec:LogFiz} résznek megfelelően megjelennek, míg a kapcsolatukat az allokációk határozzák meg.
+        A modelleknek ebben a felosztásban négy fő eleme van. A fizikai és logikai nézetek a \ref{sec:LogFiz}. követelménynek megfelelően megjelennek, míg a kapcsolatukat az allokációk határozzák meg.
         Ez egyetlen rész, amely az eddigiek alapján meglepő, az a szimulációs modellek allokációkon belüli elhelyezése.
         \begin{figure}[!ht]
             \centering
@@ -238,14 +238,14 @@ A következőkben bemutatásra kerül a kidolgozott módszertan, amellyel az ese
         
         A javasolt módszertan szempontjából legfontosabb részlet, hogy ezek az \emph{Előzetes allokációk} egyetlen logikai elemet több fizikaihoz is hozzárendelnek. Ez a végleges modellben már nem lenne előnyös, mert mindig pontosan egy felelősre van szükség egy adott feladat végrehajtásánál, de a magas szintű terveknél éppen ezt szeretnénk elérni.
         Ennek oka, hogy a fizikai és logikai nézeteket nem véletlenül választottuk külön, az egyes vetületekben a komponensek határai tipikusan eltérnek, átlapolódnak.
-        Ha ez nem így lenne, akkor valószínűleg nem sikerült rendesen elválasztani a két nézetet, tehát ez egyik túl nagy mértékben meghatározta a másikat vagy már túlzottan belemerültünk az implementáció részleteibe. Mindkét eset könnyen vezethet szuboptimális megoldásokhoz és nehezen átlátható modellekhez. (Lásd: \ref{sec:LogFiz})
+        Ha ez nem így lenne, akkor valószínűleg nem sikerült rendesen elválasztani a két nézetet, tehát ez egyik túl nagy mértékben meghatározta a másikat vagy már túlzottan belemerültünk az implementáció részleteibe. Mindkét eset könnyen vezethet szuboptimális megoldásokhoz és nehezen átlátható modellekhez. (Lásd: \ref{sec:LogFiz}. követelmény)
         
         A célunk, hogy ezeket a többszörös allokációkat és mögöttes jelentésüket fel tudjuk használni a modell további finomítása során. Ez a rejtett információ az, amely korábban sokszor iteratív finomítással került feltárásra, pedig helyes allokációkkal és azok vizsgálatával könnyen átlátható.
         A következő fázis előtt fontos kitérni arra, hogy mi is okozza pontosan a többszörös allokációkat, illetve milyen információt hordoznak a későbbi lépések számára.
         
         A fő ok, hogy a kérdéses logikai feladatot több fizikai komponens együttes munkája képes ellátni. Ebben az esetben ezt a feladatot tovább kell bontani az alapján, hogy milyen részfeladatokat melyik komponens valósít majd meg.
         Azért fontos, hogy ez a lebontás ne a magas szintű modellben történjen, mert annak feladata az adott probléma minél pontosabb megértése és hatékony megoldása, nem a konkrét implementáció elkészítése.
-        Ha már ezen a szinten elvégeznénk a feladatok felosztását a fizikai komponensek függvényében, akkor az megnehezítené a modell átlátását, mert megfosztana minket a hierarchikus tervezési módszerektől amelyeket a \ref{sec:Hierarhia} részben tárgyaltunk.
+        Ha már ezen a szinten elvégeznénk a feladatok felosztását a fizikai komponensek függvényében, akkor az megnehezítené a modell átlátását, mert megfosztana minket a hierarchikus tervezési módszerektől amelyeket a \ref{sec:Hierarhia}. követelmény kifejtésében tárgyaltunk.
         
         A másik lehetséges ok a biztonságkritikus rendszerekkel szembeni követelményekből és azok teljesítéséből adódik. Név szerint a redundáns alrendszerekből. Ha csökkenteni akarjuk egy alrendszer meghibásodásának esélyeit akkor gyakran az egyetlen ésszerű megoldás az, ha több példányt is beépítünk belőle a rendszerbe, amelyek külön-külön is képesek ellátni a feladatukat.
         Ennek előnye, hogy annak jóval kisebb az esélye, hogy több is meghibásodik a kérdéses rendszerből\footnote{Ez az állítás csak független hibaokokat feltételezve érvényes. Ha ezt nem feltételezhetjük, akkor diverz tervezéssel védekezhetünk, ahol a duplikált alrendszerek nem pontos mások. Csak a velük szembeni követelmények azonosak, az implementáció minél eltérőbb, minimalizálandó az összefüggő hibaokokat. Például hiába használunk több GPS modult helymeghatározásra, ha nem az egyes modulok hanem maga a GPS hálózat válik működésképtelenné, akkor a redundancia önmagában nem nyújt védelmet.}, így tovább növelhettük a rendszer megbízhatóságát.
@@ -299,7 +299,7 @@ A következőkben bemutatásra kerül a kidolgozott módszertan, amellyel az ese
         Ilyen modelleket minden módszertan használ a fejlesztés elején (Lásd: \ref{sec:KorabbiModszerek} rész), sajnos ennek a lépésnek a részletes vizsgálatára a dolgozat kereteiben nem volt lehetőség.
 
         \subsubsection{A könyvtárak szerkezete és használata}
-        Ahogy az a \ref{sec:Ujrahasznalas} részben is olvasható volt, a tervezés során gyakran felmerül az igény az egyes komponensek újrahasználására, esetleg külső beszállítótól való beszerzésére.
+        Ahogy az a \ref{sec:Ujrahasznalas}. követelménynél is olvasható volt, a tervezés során gyakran felmerül az igény az egyes komponensek újrahasználására, esetleg külső beszállítótól való beszerzésére.
         Ennek megkönnyítésének érdekében a módszertannak támogatni kell komponenskönyvtárak létrehozását és használatát is.
         A módszertanhoz kidolgozott könyvtárstruktúra a \ref{fig:Konyvtar} ábrán látható.
         \begin{figure}[!ht]
@@ -326,13 +326,100 @@ A következőkben bemutatásra kerül a kidolgozott módszertan, amellyel az ese
         Ha tehát ezekből minél kevesebbet kell a könyvtárral együtt tárolni, akkor azok mérete radikálisan csökkenthető.
 
         \subsubsection{Szimulációs modellek használata}
-        Mivel a módszertan kidolgozásánál külön cél volt a szimulációs technológiák integrálása, ezért tekintsük át az ezekre vonatkozó részeket.
+        Mivel a módszerek kidolgozásánál külön cél volt a szimulációs technológiák integrálása, ezért tekintsük át az ezekre vonatkozó részeket.
         
-        A szimulációs modellek rendszermodellen belüli reprezentációival kapcsolatos elvárások a \ref{sec:SzimIntKov} részben olvashatóak. A legfontosabb követelmény, hogy több szimulációs modellt is támogasson a módszertan egy adott komponenshez, teljesül, mivel több is hozzárendelhető az allokációkhoz.
+        A szimulációs modellek rendszermodellen belüli reprezentációival kapcsolatos elvárások a \ref{sec:SzimIntKov}. követelménynél olvashatóak. A legfontosabb követelmény, hogy több szimulációs modellt is támogasson a módszertan egy adott komponenshez, teljesül, mivel több is hozzárendelhető az allokációkhoz.
         Ezeknek a modelleknek a finomítása ráadásul folyamatosan történik a módszertan folyamán, a rendszerrel együtt fejlődnek és szerves részét képzik a fejlesztési folyamatnak, a tervezői döntéshozásnak.
         
         Ezzel elérhető a \ref{sec:mbseElonyei} és \ref{sec:szimElonyok} részekben leírt minden fejlesztési fázisban jelenlévő V\&V tevékenység és gazdaságosság, mivel a módszer a lehető legkorábbi fázisban kiszűri a koncepcionális vagy implementációs hibákat.
 
-        Azzal, hogy a nagyobb fázisokban hierarchikusan helyezkednek el az egyes allokációk, támogatható, hogy egy magasabb szinten lévő modell hivatkozzon az általa tartalmazottakra, így a szimulációs modellekre is kiterjesztődnek a \ref{sec:Hierarhia}-ban tárgyalt hierarchikus módszerekre vonatkozó előnyök.
+        Azzal, hogy a nagyobb fázisokban hierarchikusan helyezkednek el az egyes allokációk, támogatható, hogy egy magasabb szinten lévő modell hivatkozzon az általa tartalmazottakra, így a szimulációs modellekre is kiterjesztődnek a \ref{sec:Hierarhia}. követelménynél tárgyalt hierarchikus módszerekre vonatkozó előnyök.
         
         Mivel a hierarchiában minden szint több szimulációs modellt támogat, így hierarchikus szimulációs modellek használatával még egyszerűbbé válik a különböző részletességű szimulációs modellek készítése, mivel a az alkomponensek esetén elég a használt szimulációs modellek hivatkozásait redefiniálni.
+
+        \subsubsection{Kontextus modellezés}
+        A rendszertervezési módszertanokban (Lásd: \ref{sec:KorabbiModszerek} rész) rendszerint a rendszer modellezése mellett nagy hangsúlyt helyeznek annak kontextusának, azaz beágyazó környezetének a modellezésére. Fontos tehát ezt a területet is részletesen megvizsgálni, hogy minél közelebb kerülhessünk egy teljes, gyakorlatban is jól alkalmazható módszertanhoz.
+
+        A rendszer kontextusa az, ami meghatároz számos követelményt, illetve azt, hogy a rendszer hogyan lép interakcióba a környezetét alkotó elemekkel.
+        Ezek azok a kapcsolódási pontok és követelmények, amelyek a már bemutatott módszerekben a fejlesztés első fázisában jelentek meg, tehát nem meglepő, hogy ez az alfejezet ahhoz a lépéshez tartalmaz kiegészítéseket.
+        
+            \paragraph{A nézetek fontossága}
+            Elsőre kérdéses lehet, hogy a kontextusmodellnél is szükséges-e a logikai és fizikai nézetek elválasztása.
+            A válasz igen, de a megértéséhez célszerű egy konkrét példát venni.
+            
+            Ha egy műholdat tervezünk, akkor szeretnénk vele kommunikálni a földről. Ez történhet egyetlen földi állomásról is, de van, hogy jóval többet akarunk kommunikálni, mint amennyit egyetlen földiállomás lehetővé tenne. Ilyenkor erre a célra használhatunk több földiállomást is, amelyek azonban lehet hogy nem egyformák. Ilyenkor a fizikai modellben lehet hogy teljesen más frekvenciasávon, sávszélességen és modulációval valósul meg a kapcsolat, de logikailag nincs feltétlenül különbség.
+            Ilyenkor azt szeretnénk, hogy a logikai modell a lehető legegyszerűbb maradjon, de a fizikaiban megjelenjenek ezek a részletek is, mivel ezek fontosak a fejlesztés szempontjából.
+
+            A szétválasztás azért is fontos, mert a rendszer esetében is jellemzően más-más szakemberek dolgoznak ezeken a területeken. Ez valószínűleg a kontextusmodell esetében is így van, de ha mégsem, akkor is célszerű úgy elkészíteni ezt a modellt, hogy az könnyen használható legyen a továbbiakban.
+
+            \paragraph{Analógiák az egyes fázisok során}
+            Azért fontos külön foglalkozni a kontextusmodellel, mert jellemzően nem pontosan ugyanaz a folyamat szükséges az elkészítéséhez, mint a rendszermodell esetében, de a főbb gondolatok továbbra is azonosak.
+            Vegyük végig a korábban bemutatott fázisokat a kontextusmodellre nézve és vizsgáljuk meg, hogyan alkalmazhatóak ehhez a modelltípushoz.
+
+            A kontextus \emph{Fekete doboz modelljének} elkészítése során a már ismert követelményeket ugyanúgy felvesszük, azonban a logikai és fizikai modellek esetében nem jelennek meg a rendszernél látott külvilág számára ismert elemek.
+            Ennek oka, hogy a kontextus maga is egy rendszer, méghozzá zárt. Nincsenek tehát, olyan kívülről ismert elemei mint magának a megtervezendő rendszernek. Ha lennének ilyen elemei, akkor azok a kontextus kontextusához kapcsolódnának és ez a folyamat talán sosem érne véget.
+            Az, hogy hol állunk meg, mi tartozik a kellően részletes kontextusmodellhez és mi az ami már felesleges részlet, természetesen már egy tervezői döntés. A javasolt módszerek nem adják meg hol húzzuk meg ezt a határt, csupán a létét követelik meg, hogy a valódi rendszerek modellje is kezelhető mértékű maradjon, ezzel a zárt világ szemlélettel.
+
+            A rendszerünk célja, hogy valamilyen formában interakcióba lépjen a környezetével. A kontextusmodell megadja, hogy milyen feltételezésekkel élhetünk majd a tervezés során, illetve milyen követelményeknek kell megfelelnie a rendszernek, hogy megfelelő módon interakcióba a környezetével.
+            Megfordítva, a rendszerünkre vonatkozó követelmények azok a feltételezések, amelyekkel a beágyazókörnyezet él a rendszerünk kapcsán. Mivel a környezetünk feltételezéseit rendszerint nem tudjuk megváltoztatni, így számunkra követelmény, hogy megfeleljünk ezeknek a siker elérése érdekében.
+
+            A \emph{Magas szintű modell} szintjén kezdjük el kibontani a kontextusmodellt. Ebben az esetben nem funkciók és alkatrészek jelennek meg, hanem a rendszer és kontextusának elemei, valamint az egyes elemek közti kapcsolatok.
+            A cél a kontextust addig finomítani ebben a lépésben, hogy minden fontos szereplő megjelenjen.
+            
+            A korábbi műholdas példában a rádiós kapcsolatok esetén például foglalkoznunk kell a különböző zajokkal.
+            Ezek a logikai modellben elég ha zajként megjelennek, mivel a szerepük itt az, hogy a feladatoknál később foglalkozzunk a zajszűréssel.
+            Ellenben a fizikai modellnél szeretnénk lebontani ezt szűkebb csoportokra. Például származhat a zaj más kommunikációs eszközökből, lehet háttérsugárzás, de akár aktívabb naptevékenység is. Ezek tipikusan másképpen viselkednek és másképpen is lehet védekezni ellenük a fejlesztés során, hiába ugyanaz a feladat logikailag.
+
+            A \emph{Részletes modellben} a konkrét implementációhoz kapcsolódó elemekkel bővítjük az eddigi modellt. Ide tartoznak például, hogy egy rádiós kapcsolat milyen paraméterekkel valósul meg a rendszer és kontextusa között.
+            Milyen frekvenciasávot és modulációt használunk, milyen protokollt kell betartanunk. Ez az a szint, amely hasonló rendszerek esetén is eltérhet, például két különböző műholddal szemben hasonlóak a magasszintű elvárások, azonban a konkrét feladatuk már számos különbséget határoz meg, amelyek eltérő kontextusmodellt eredményeznek.
+            Azzal, hogy a kontextusmodellben is elválasztjuk a ezeket a szinteket, elősegítjük, hogy ezek a modellek is részben újrahasználhatóak legyenek.
+
+            Feltéve, hogy a műholdas példát egy műholdgyártó cég szemszögéből nézzük, szeretnénk, ha lenne egy stabil alapunk a termékeink tervezésénél. Az első két fázis nagyrészt megegyezik az egyes megrendelések között, ha egyszer jól elkészítjük ezeket a modelleket, akkor az újrahasználásuk nem csak gyorsabbá, de biztonságosabbá teszi a tervezési folyamatot, mert a jövőben nem maradhatnak ki a már ismert tényezők a modellből.
+            Az egyes megrendelésekben csak a \emph{Részletes modellt} kell mindig újra elkészíteni a konkrét igények kapcsán, de ez már ráépül a meglévő, biztos alapokra.
+            
+            Ez a megoldás hasonló az autóiparban jellemző platformalapú módszerekhez, mert csak a pontos feladathoz kell igazítani a meglévő eszközöket, bár ebben az esetben inkább egy keretrendszerről beszélhetünk az adott feladat kapcsán.
+            
+            \paragraph{Az allokációk fontossága}
+            A rendszertervezés során kiemelt figyelmet kaptak az allokációk. A kontextusnál ez a szerep továbbra is megmarad, mivel a nézeteket továbbra is össze kell kötni és a szimulációs modelleknek is meg kell jelenni a modellben.
+
+            Továbbá láttuk, hogy továbbra is jelen van egy folyamatos finomítás a módszerekben kibontandó hierarchiákkal, amelyek kezelésére szolgál az általam bevezetett allokációkon alapú modellezési szemléletet.
+
+            Az allokációk szerepe azért is fontos továbbá a kontextusmodellben, mert azt szeretnénk, hogy a rendszermodell pontosan illeszkedjen a kontextusmodellbe, amihez elengedhetetlen az azonos struktúra.
+
+            \paragraph{A rendszer megjelenése}
+            Felmerülhet az a kérdés, hogy hogyan jelenik meg maga a rendszer, amelyre több válasz is adható.
+            A kérdés onnan ered, hogy a rendszerünk nem feltétlenül egyetlen elem, hanem több különálló egység, azaz rendszerek rendszere.
+            Ez kiemelten fontos elosztott kiberfizikai rendszerek esetén, ahol egy-egy eszköz tipikusan limitált képességekkel bír és több egység együttműködésével oldható meg egy feladat.
+            Ilyenkor a rendszer elemei egyben egymás kontextusát is alkotják.
+
+            Ha tényleg egyetlen elemünk van, akkor természetesen ez egy egyszerű kérdés, a rendszert egy elem reprezentálja.
+            Jó megközelítés lehet ez akkor is, ha egy adott csapat készíti el az összes komponenst, mert így először a teljes rendszerre összpontosíthatnak és az így feltárt követelményeket később felhasználhatják a rendszer komponenseinek lebontásánál.
+            Ez a megközelítés akkor is jól működik, ha előre nem tudjuk, hogy szükség van ilyen lebontásra, vagy nem ismert pontosan, milyen lebontásra lesz szükség.
+
+            Ha viszont előre ismerjük a lebontást, vagy a komponenseket több külön csapat fejleszti majd, akkor felvehetjük előre az egyes komponenseket is az előbb bemutatott hierarchia alkalmazása nélkül is. Így minden alrendszernek elkészítve a kontextusmodelljét.
+
+            A két módszer között nincs egyértelmű sorrend, az alkalmazásuk inkább az adott projekttől és a fejlesztő szervezet struktúrájától, esetleg saját konvencióktól függ, az is elképzelhető, hogy ezeknek egy kombinációját használjuk és még több hierarchiát vezetünk be.
+            Ez csupán egy kitekintés, amely modellezési javaslatokat vezet be a módszerek esetleges alkalmazóinak.
+
+            \paragraph{A rendszer fejlesztése a kontextusmodell alapján}
+            A kontextusmodellt elsősorban a rendszerek fejlesztésének elősegítéséhez alkotjuk meg a kezdeti lépések között, de látható, hogy a rendszer tervezésének első lépéseivel együtt jön létre.
+
+            Azzal, hogy a fentiek szerint a rendszermodellel összhangban álló struktúrát alkalmaztunk ehhez a modellhez is, lehetőségünk nyílik arra, hogy a kettőt szorosabban összefűzzük, hiszen két azonos modell elkészítése a rendszerről felesleges lenne, csupán hibalehetőségeket vinne a tervezési folyamatba.
+
+            Ehelyett megtehetjük, hogy a rendszernek egyetlen modellje van, amely be van ágyazva a kontextusmodellbe. Ez a továbbvitele annak a korábbi gondolatnak, hogy a kontextusunk egy ugyanolyan rendszer, mint a miénk, csupán egy zárt világban. Ennek a világnak az egyetlen része, amit tetszőlegesen alakíthatunk, az a saját, általunk tervezett rendszer, ami így folyamatosan kerül kibontásra, a kontextusmodellel együtt.
+
+            A módszer előnye, hogy nincs két független modell a rendszerünkről, szóval ezek nem is kerülhetnek inkonzisztens állapotba, a nyomonkövethetőség sokkal egyszerűbben garantálható, mit két külön modell esetén.
+
+            \paragraph{A szimulációk szerepe}
+            A szimulációk szempontjából a kontextusmodellnek kiemelt szerepe van. Mivel a javasolt módszerek szempontjából kiemelten fontosak a szimulációk, így célszerű ezt a szempontot is megvizsgálni a kontextusmodellek kapcsán.
+
+            A szimulációk lényege, hogy a rendszerünk egy virtuális megfelelőjét egy virtuális környezetben tudjuk vizsgálni, ezzel elkerülve, vagy legalább csökkentve a fizikai teszteléssel járó időszükséglet és költségek mértékét.
+
+            A kontextusmodell az, amely a teljes rendszerre nézve leírja ezt a virtuális környezetet, tehát ha nem csak egy-egy komponenst akarunk így validálni, akkor elengedhetetlen egy ehhez megfelelő kontextusmodell elkészítése.
+
+            Bár a rendszer tervezésénél a \emph{Fekete doboz modell} elkészítésénél még nem alkalmaztunk szimulációkat, a kontextusmodellezés esetén mégis hasznos lehet.
+            
+            Vegyük a korábbi műholdas példát. A különböző rádiós berendezések költségesek így szeretnénk minél kevesebb ilyen alrendszert felhasználni a műholdunkhoz, de legalább annyi kell, hogy megbízhatóan kommunikálhassunk a műholddal a szükséges gyakorisággal.
+            A különböző kommunikációs-alrendszer konfigurációkat szimulálva meghatározhatjuk azok hatékonyságát különböző szituációkban, ahol esetleg különböző meghibásodások és zavarok is könnyen figyelembe vehetőek.
+            Egy ilyen vizsgálat csupán a műhold pályájának és a földiállomások felszerelésének, helyzetének ismeretét igénylik, amelyek megjelennek a kontextusmodellben, így a követelményeknél megadható, milyen paraméterekkel kell tudjon a rendszerünk kommunikálni.
+

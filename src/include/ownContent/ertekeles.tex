@@ -13,6 +13,9 @@ A következőkben először a rendszermodell, majd a szimulációs modell kerül
     \subsection{A rendszermodell}
     A rendszermodell esetében csak a főbb tervezési szempontok és a felépítés kerül bemutatásra, mert a dolgozat lényegének megértésében a konkrét forráskód elemzése nem segíti az olvasót. Ehelyett a struktúra bemutatása és a módszertan szempontjából lényeges részletek kiemelésére helyezem inkább a hangsúlyt ebben a részben.
     
+    Az esettanulmány keretében a rendszer egy előre meghatározott pozíciót próbál tartani, így a kontextusmodellben csupán a szél jelenik meg külső befolyásoló elemként.
+    A szelet a drón tömegközéppontjában ható erőként és forgatónyomatékként modelleztem, ezek mértéke az idő függvényében, a szimulációs modellben paraméterként adható meg, elősegítve a különböző terhelések vizsgálatát.
+
     A modellezett kvadkopter fizikailag igen egyszerű felépítést követ. Egy GPS és egy IMU modul segítségével méri a pozícióját és az orientációját. A példa egyszerűsége miatt ezek ideális szenzorként lettek modellezve.
     A módszertanban leírtak szerint ezt a modellt egy újabb iterációban lehetne tovább finomítani, de jelenleg tökéletesen megfelelő ez az absztrakció.
     
@@ -41,6 +44,9 @@ A következőkben először a rendszermodell, majd a szimulációs modell kerül
     
     Ez alapján készült el később a Modelica modell is az eszköz beépített blokk-könyvtárával, amellyel grafikusan is megadhatóak a nyelv elemei.
     
+    A szimulációk alkalmazására a motorok paramétereinek kiválasztását használtam fel példaként. A követelmény az volt, hogy a drón $0.02N$ erőt és $0.02Nm$ forgatónyomatékot kifejtő szél mellett is maximum $0.01m$ kitéréssel tudja tartani a megadott pozíciót.
+    A szimulációk szerepe az volt, hogy megadott motorok közül szimulációk segítségével választottam ki azt, amelyik képes volt tartani ezt a követelményt.
+
     Mivel a dolgozatban egyaránt foglalkoztam az FMU-kkal kompatibilis és a megkötések nélküli szimulációs modellekkel, ezért mindkét módszerrel készült egy-egy szimulációs modell.
     A megértést megkönnyítendő, a két modellben a különböző blokkokat eltérő színnel és betűjellel jelöltem az alábbiak szerint:
 
@@ -99,24 +105,32 @@ A következőkben először a rendszermodell, majd a szimulációs modell kerül
         \end{figure}
 
         \subsubsection{Szimulációs eredmények}
-        A szimulációkat futtatva a rendszer mindkét modell esetében felemelkedett, megközelítette az előre kijelölt pozíciót és azt a széllökések mellett is tartotta elfogadható mértékű kitérések mellett.
-        
-        A szimulációs eredményeket szemléltető animációról készült képek a \ref{fig:SimRes} ábrán láthatóak.
-        Az ábrán a fekete elemek a referencia koordináta-rendszert, a kékek magát a kvadkoptert, míg a zöldek az erőket és forgatónyomatékokat szemléltetik.
-        A szélső, motorokat jelképező gömbökre hatóerők és forgatónyomatékok a motorok által keltettek, amelyekkel beavatkozunk a rendszerbe. Az origóból induló lefelé mutató erő a gravitációt reprezentálja.
-        A kvadkopter testén ható erő és forgatónyomaték, amely az ábrán látható módon a többi nyíltól függetlenül mozog, a rendszerre ható szélzavarást reprezentálja.
+            \paragraph{Prototipizálás és validáció}
+            A fejlesztés során a szimulációk segítségével választottam ki azokat a motorparamétereket, amelyekkel már megfelelő pontossággal garantálható volt a pozíciótartás.
+            Az esettanulmány keretében ez azt jelentette, hogy minden méréshez manuálisan kellett átparaméterezni a szimulációs modellt és a gyűjtött adatokat manuálisan kiértékelni. Ez egy ilyen egyszerű példa keretében is időigényes feladat volt manuálisan, azonban nem igényelte  az összes motorvariáns és a többi alkatrész beszerzését és prototípusok gyártását, ahogy egy szélcsatorna használatát sem.
 
-        A szimuláció paraméterei úgy lettek meghatározva, hogy a rendszer az origóból felszállva az $y$ tengelyt jelképező nyíl hegyénél lebegjen.
-        
-        Az ábrán látható, hogy a rendszer a szimuláció második felében -öt másodperc után- már elérte a kitűzött célt, a továbbiakban ezt próbálja tartani a szélzavarás ellenére, ez okozza a harmadik és negyedik képen látható kitéréseket.
-        Ezeknek az eredményeknek az alapján, a tervezési folyamat és az esettanulmány is sikeresnek tekinthető.
+            A modellek automatikus generálásával ez a folyamat mindössze a mérési összeállítás és a követelmények modellezését tenné szükségessé, a mérések elvégzése és kiértékelése már teljesen automatizáltan történhetne, lehetővé téve több alternatíva gyors vizsgálatát.
+            Fontos megemlíteni, hogy a követelmények és a mérési összeállítások modelljének egyébként is meg kell jelenni a rendszermodellben, mivel ez elengedhetetlen a nyomonkövethetőség biztosításához és a mérések megismételhetőségéhez.
 
-        \begin{figure}[!ht]
-            \centering
-            \includegraphics[width=150mm, keepaspectratio]{figures/SimRes.png}
-            \caption{A szimulációk eredménye pillanatképeken.}
-            \label{fig:SimRes}
-        \end{figure}
+            \paragraph{Végleges validáció}
+            A fejlesztést befejezve, az utolsó lépés a végleges szimulációs modellek segítségével a modell validálása volt. A szimulációkat futtatva a rendszer mindkét modell esetében felemelkedett, megközelítette az előre kijelölt pozíciót és azt a széllökések mellett is tartotta elfogadható mértékű kitérések mellett.
+            
+            A szimulációs eredményeket szemléltető animációról készült képek a \ref{fig:SimRes} ábrán láthatóak.
+            Az ábrán a fekete elemek a referencia koordináta-rendszert, a kékek magát a kvadkoptert, míg a zöldek az erőket és forgatónyomatékokat szemléltetik.
+            A szélső, motorokat jelképező gömbökre hatóerők és forgatónyomatékok a motorok által keltettek, amelyekkel beavatkozunk a rendszerbe. Az origóból induló lefelé mutató erő a gravitációt reprezentálja.
+            A kvadkopter testén ható erő és forgatónyomaték, amely az ábrán látható módon a többi nyíltól függetlenül mozog, a rendszerre ható szélzavarást reprezentálja.
+
+            A szimuláció paraméterei úgy lettek meghatározva, hogy a rendszer az origóból felszállva az $y$ tengelyt jelképező nyíl hegyénél lebegjen.
+            
+            Az ábrán látható, hogy a rendszer a szimuláció második felében -öt másodperc után- már elérte a kitűzött célt, a továbbiakban ezt próbálja tartani a szélzavarás ellenére, ez okozza a harmadik és negyedik képen látható kitéréseket.
+            Ezeknek az eredményeknek az alapján, a tervezési folyamat és az esettanulmány is sikeresnek tekinthető.
+
+            \begin{figure}[!ht]
+                \centering
+                \includegraphics[width=150mm, keepaspectratio]{figures/SimRes.png}
+                \caption{A szimulációk eredménye pillanatképeken.}
+                \label{fig:SimRes}
+            \end{figure}
 
     \section{Értékelés a motivációk szempontjából}
     Először érdemes megvizsgálni, hogy a dolgozat motivációjául szolgáló szempontok szerint mennyire eredményes az eddigi munka.
