@@ -1,5 +1,5 @@
-\documentclass[11pt,a4paper,oneside]{report}             % Single-side
-%\documentclass[11pt,a4paper,twoside,openright]{report}  % Duplex
+%\documentclass[11pt,a4paper,oneside]{report}             % Single-side
+\documentclass[11pt,a4paper,twoside,openright]{report}  % Duplex
 
 \input{include/packages}
 
@@ -62,13 +62,14 @@
 % Table of Contents
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \tableofcontents\cleardoublepage
-
+\cleartorightpage
 
 % Declaration and Abstract
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \include{include/declaration} %TODO Hallgatói nyilatkozat -- TDK és OTDK esetén törlendő!
+\cleartorightpage
 \include{content/abstract}    %TODO Összefoglaló -- TDK és OTDK esetén nem kötelező
-
+\cleartorightpage
 
 % The main part of the thesis
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

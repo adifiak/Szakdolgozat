@@ -7,7 +7,8 @@
 % (like the ToC, the References, and the Chapter pages)remain in plane style
 
 \pagestyle{plain}
-\geometry{inner=35mm, outer=25mm, top=28mm, bottom=25mm}
+%\geometry{inner=35mm, outer=25mm, top=28mm, bottom=25mm}
+\geometry{inner=35mm, outer=25mm, top=18mm, bottom=35mm}
 %\geometry{inner=15mm, outer=15mm, top=15mm, bottom=15mm}
 
 \setcounter{tocdepth}{3}
@@ -129,3 +130,13 @@
 \theorembodyfont{\normalfont}
 \theoremsymbol{}
 \newtheorem{req}{Követelmény}
+
+% Kétoldalas fix
+\newcommand*\cleartoleftpage{%
+    \clearpage
+    \ifodd\value{page}\hbox{}\newpage\fi
+}
+\newcommand*\cleartorightpage{%
+    \clearpage
+    \unless\ifodd\value{page}\hbox{}\newpage\fi
+}
